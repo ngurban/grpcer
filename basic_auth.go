@@ -28,7 +28,7 @@ const BasicAuthKey = contextKey("authorization-basic")
 
 // WithBasicAuth returns a context prepared with the given username and password.
 func WithBasicAuth(ctx context.Context, username, password string) context.Context {
-	return context.WithValue(ctx, BasicAuthKey, username+":"+password)
+	return context.WithValue(ctx, BasicAuthKey, "basic "+username+":"+password)
 }
 
 var _ = credentials.PerRPCCredentials(basicAuthCreds{})

@@ -180,9 +180,10 @@ import (
 	"io"
 
 	grpc "google.golang.org/grpc"
-	grpcer "github.com/UNO-SOFT/grpcer"
+	grpcer "github.com/ngurban/grpcer"
 
-	pb "{{.Import}}"
+    "integration_grpc/proto"
+	pb "integration_grpc/proto"
 	{{range .Dependencies}}"{{.}}"
 	{{end}}
 )

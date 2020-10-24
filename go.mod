@@ -1,4 +1,4 @@
-module github.com/UNO-SOFT/grpcer
+module github.com/ngurban/grpcer
 
 require (
 	github.com/UNO-SOFT/otel v0.0.4
