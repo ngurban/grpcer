@@ -121,9 +121,10 @@ func Connect(endpoint, CAFile, serverHostOverride string) (*grpc.ClientConn, err
 		endpoint, prefix = (endpoint)[:i], (endpoint)[i:]
 	}
 	dc := DialConfig{
-		PathPrefix:         prefix,
-		CAFile:             CAFile,
-		ServerHostOverride: serverHostOverride,
+		PathPrefix:                     prefix,
+		CAFile:                         CAFile,
+		ServerHostOverride:             serverHostOverride,
+		AllowInsecurePasswordTransport: true,
 		Log: func(keyvals ...interface{}) error {
 			for i := 0; i < len(keyvals); i += 2 {
 				keyvals[i] = fmt.Sprintf("%v=", keyvals[i])
