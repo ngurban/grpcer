@@ -19,7 +19,6 @@ package grpcer
 import (
 	"context"
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/UNO-SOFT/otel"
@@ -104,7 +103,6 @@ func DialOpts(conf DialConfig) ([]grpc.DialOption, error) {
 	}
 	ba := NewBasicAuth(conf.Username, conf.Password)
 	dialOpts = append(dialOpts, grpc.WithPerRPCCredentials(ba))
-	log.Printf("dialConf=%+v", conf)
 	creds, err := credentials.NewClientTLSFromFile(conf.CAFile, conf.ServerHostOverride)
 	if err != nil {
 		return dialOpts, fmt.Errorf("%q,%q: %w", conf.CAFile, conf.ServerHostOverride, err)
@@ -126,10 +124,6 @@ func Connect(endpoint, CAFile, serverHostOverride string) (*grpc.ClientConn, err
 		ServerHostOverride:             serverHostOverride,
 		AllowInsecurePasswordTransport: true,
 		Log: func(keyvals ...interface{}) error {
-			for i := 0; i < len(keyvals); i += 2 {
-				keyvals[i] = fmt.Sprintf("%v=", keyvals[i])
-			}
-			log.Println(keyvals...)
 			return nil
 		},
 	}
